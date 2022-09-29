@@ -1,5 +1,4 @@
-import { Meta } from ".."
-import { Header } from "../Header"
+import { Header, Meta } from ".."
 
 type LayoutProps = {
   children: React.ReactNode
