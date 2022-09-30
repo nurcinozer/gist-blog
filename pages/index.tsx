@@ -1,47 +1,49 @@
-import type { NextPage } from 'next'
-import { useMemo, useState } from 'react';
-import { Card, Layout } from '../components'
-import { useGists } from '../hooks/useGists'
+import { GetServerSideProps } from 'next';
+import { useMemo } from 'react';
+import { Layout, List } from '../components'
+import { getGistByFilename, getGists, Gist } from '../utils/services';
 
-const Home: NextPage = () => {
-  const { gists } = useGists();
-  const [rawContent, setRawContent] = useState('');
+type HomeProps = {
+  gists: Gist[]
+}
+
+const Home: React.FC<HomeProps> = ({
+  gists
+}) => {
 
   const getMarkDownFiles = useMemo(() => {
+    if (!gists) return [];
     return gists.filter(g => g.files[
       Object.keys(g.files)[0]
     ].language === 'Markdown')
   }, [gists])
 
-  const fetchRawUrl = (url: string) => {
-    return fetch(url)
-      .then(res => res.text())
-  }
-
   return (
     <Layout>
-      <div className='py-5 overflow-hidden'>
-        {
-          getMarkDownFiles.map((gist, index) => {
-            fetchRawUrl(gist.files[Object.keys(gist.files)[0]].raw_url)
-              .then(res => setRawContent(res))
-            return (
-              (
-                <Card
-                  key={index}
-                  files={gist.files}
-                  rawContent={rawContent}
-                  description={gist.description}
-                  created_at={gist.created_at}
-                  comments={gist.comments}
-                />
-              )
-            )
-          })
-        }
-      </div>
+      {
+        <List data={getMarkDownFiles} />
+      }
     </Layout>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const gists = await getGists();
+
+    return {
+      props: {
+        gists
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+
+      }
+    }
+  }
+}
+
 
 export default Home
