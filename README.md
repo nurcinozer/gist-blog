@@ -57,6 +57,14 @@ date: "2020-01-01"
 ---
 ```
 
+## Tech Stack
+
+- Typescript
+- Nextjs
+- Github API
+- Tailwindcss
+- Tailblocks
+
 ## Contributing
 
 Contributions, issues and feature requests are welcome!
