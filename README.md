@@ -80,7 +80,3 @@ Give a ⭐️ if this project helped you!
 
 - [Github Blog](https://github.com/bufgix/github-blog)
 - [React Blog Github](https://github.com/saadpasta/react-blog-github)
-
-```
-
-```

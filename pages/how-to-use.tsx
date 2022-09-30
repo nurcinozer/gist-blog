@@ -27,7 +27,7 @@ const stepList = [
   },
   {
     title: 'Add your blog posts',
-    content: 'You can add your blog posts by creating a markdown extension file in gist.  new gist. You can add metadata to your gist by adding YAML front matter to your gist. You can see the example gist here: https://gist.github.com/nurcinozer/d819cdf7004a17c1a18bc20e0781e299'
+    content: 'You can add your blog posts by creating a markdown extension file in gist. You can add metadata to your gist by adding YAML front matter to your gist. You can see the example gist here: https://bit.ly/3Rlk0e1'
   },
   {
     title: 'Yay! Your blog posts are ready to go! 🥳',

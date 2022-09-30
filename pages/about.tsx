@@ -30,7 +30,7 @@ const About: React.FC<{ data: UserDetail, avatar: string }> = ({
               following={data.following}
               publicGists={data.public_gists}
             />
-            <div className="lg:w-4/5 pb-20 flex md:flex-wrap mx-auto">
+            <div className="lg:w-4/5 pb-20 flex flex-wrap mx-auto">
               <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 lg:mr-24">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">ABOUT</h2>
                 <h1 className="text-white text-3xl title-font font-medium mb-4">{data.name}</h1>
