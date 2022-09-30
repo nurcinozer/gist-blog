@@ -2,12 +2,12 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import { Button, Layout, List, Spinner, Statistic, Table } from '../components'
-import { getGists, getGithubUser, Gist, User, UserDetail } from '../utils/services';
+import { getGists, getGithubUser, getUserAvatar, Gist, User, UserDetail } from '../utils/services';
 
 
-const About: React.FC<{ data: UserDetail, user: User }> = ({
+const About: React.FC<{ data: UserDetail, avatar: string }> = ({
   data,
-  user,
+  avatar,
 }) => {
   const [loading] = useState(true);
 
@@ -24,6 +24,12 @@ const About: React.FC<{ data: UserDetail, user: User }> = ({
       {
         data ? (
           <>
+            <Statistic
+              publicRepos={data.public_repos}
+              followers={data.followers}
+              following={data.following}
+              publicGists={data.public_gists}
+            />
             <div className="lg:w-4/5 pb-20 flex md:flex-wrap mx-auto">
               <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 lg:mr-24">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">ABOUT</h2>
@@ -41,14 +47,8 @@ const About: React.FC<{ data: UserDetail, user: User }> = ({
                   </Button>
                 </div>
               </div>
-              <Image src={`https://github.com/nurcinozer.png`} alt={data.name} width={400} height={400} className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" />
+              <Image src={avatar} alt={data.name} width={400} height={400} className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" />
             </div>
-            <Statistic
-              publicRepos={data.public_repos}
-              followers={data.followers}
-              following={data.following}
-              publicGists={data.public_gists}
-            />
           </>
         ) : (
           <div className='flex justify-center items-center h-screen'>
@@ -62,11 +62,12 @@ const About: React.FC<{ data: UserDetail, user: User }> = ({
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const data = await getGithubUser();
+    const [data, avatar] = await Promise.all([getGithubUser(), getUserAvatar()]);
 
     return {
       props: {
-        data
+        data,
+        avatar,
       }
 
     }

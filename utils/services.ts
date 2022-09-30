@@ -4,6 +4,13 @@ const HEADER = {
   Authorization: `token ${process.env.GITHUB_TOKEN}`,
 };
 
+export interface Repo {
+  name: string;
+  description: string;
+  html_url: string;
+  updated_at: string;
+}
+
 export interface File {
   [key: string]: {
     filename: string;
@@ -31,6 +38,7 @@ export interface User {
 }
 
 export interface UserDetail {
+  html_url: string;
   name: string;
   company: string;
   blog: string;
@@ -51,6 +59,13 @@ export interface Comment {
   user: User;
   created_at: string;
 }
+
+export const getRepos = async () => {
+  const res = await fetch(`https://api.github.com/users/${GITHUB_NAME}/repos`, {
+    headers: HEADER,
+  });
+  return res.json();
+};
 
 export const getGists = async () => {
   const res = await fetch(`https://api.github.com/users/${GITHUB_NAME}/gists`, {
@@ -85,4 +100,8 @@ export const getGithubUser = async () => {
     headers: HEADER,
   }).then((res) => res.json());
   return res;
+};
+
+export const getUserAvatar = async () => {
+  return `https://github.com/${GITHUB_NAME}.png`;
 };

@@ -35,11 +35,19 @@ export const Table: React.FC<TableProps> = ({ data }) => {
                 )
               }
             </div>
+            <div className="flex border-t border-gray-800 py-2">
+              <span className="text-gray-500">Github profile</span>
+              {
+                <Link href={data.html_url}>
+                  <a className="ml-auto text-white">{data.html_url}</a>
+                </Link>
+              }
+            </div>
             <div className="flex border-t border-b mb-6 border-gray-800 py-2">
               <span className="text-gray-500">Twitter username</span>
               {
                 data.twitter_username ? (
-                  <Link href={data.twitter_username}>
+                  <Link href={`https://twitter.com/${data.twitter_username}`}>
                     <a className="ml-auto text-white">{data.twitter_username}</a>
                   </Link>
                 ) : (

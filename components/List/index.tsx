@@ -6,7 +6,7 @@ type ListProps = {
   data: Gist[],
 }
 
-const LIMIT = 5;
+const LIMIT = 1;
 
 export const List: React.FC<ListProps> = ({
   data

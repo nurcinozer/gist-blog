@@ -10,3 +10,4 @@ export * from "./Spinner";
 export * from "./Footer";
 export * from "./Table";
 export * from "./Statistic";
+export * from "./ReposList";

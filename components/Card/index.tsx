@@ -2,7 +2,7 @@ import { CommentIcon, RightArrow } from "../Icons"
 import matter from "gray-matter"
 import Link from "next/link"
 import { convertDate, fetchRawUrl, getFileNameWithoutExtension, readingTime } from "../../utils/functions"
-import { Gist } from "../../utils/services"
+import { Gist, Repo } from "../../utils/services"
 import md from 'markdown-it';
 import { useState, useMemo } from "react"
 
@@ -98,5 +98,26 @@ const InnerCard: React.FC<
     )
   }
 
+const RepoCard: React.FC<
+  Pick<Repo, "description" | "html_url" | "name">
+> = ({
+  description,
+  html_url,
+  name: title,
+}) => {
+    return (
+      <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-800 mb-10">
+        <h2 className="text-lg sm:text-xl text-white font-medium title-font mb-2">{title}</h2>
+        <p className="leading-relaxed text-base mb-4">{description}</p>
+        <Link href={`${html_url}`}>
+          <a className="text-indigo-400 inline-flex items-center mt-4" target="_blank">
+            Get Source Code
+            <RightArrow currentColor="#6366f1" />
+          </a>
+        </Link>
+      </div>
+    )
+  }
 
-export { Card, InnerCard }
+
+export { Card, InnerCard, RepoCard }
