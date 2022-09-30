@@ -1,11 +1,10 @@
-import { RightArrow } from "../Icons"
+import { CommentIcon, RightArrow } from "../Icons"
 import matter from "gray-matter"
 import Link from "next/link"
 import { convertDate, fetchRawUrl, getFileNameWithoutExtension, readingTime } from "../../utils/functions"
 import { Gist } from "../../utils/services"
-import { CommentIcon } from "../Icons/CommentIcon"
 import md from 'markdown-it';
-import { useState, useEffect, useMemo } from "react"
+import { useState, useMemo } from "react"
 
 type DataProps = {
   title?: string
@@ -75,7 +74,7 @@ const InnerCard: React.FC<
     const { title, category, date } = data as DataProps;
 
     return (
-      <div className="w-full">
+      <div className="w-full pb-20">
         <div className="h-full bg-gray-800 bg-opacity-40 px-8 pt-16 pb-24 rounded-lg overflow-hidden relative">
           <h2 className="tracking-widest text-xs title-font text-center font-medium text-gray-500 mb-1">
             {category?.toUpperCase() || "NO CATEGORY"} • {readingTime(content)} • {convertDate(created_at) || date}

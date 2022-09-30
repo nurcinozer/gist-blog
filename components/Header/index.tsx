@@ -9,16 +9,19 @@ export const Header: React.FC<HeaderProps> = ({
   title,
 }) => {
   return (
-    <div className="flex flex-wrap flex-col md:flex-row items-center pt-3 pb-12">
+    <div className="flex flex-wrap flex-col md:flex-row items-center pt-3 pb-20">
       <nav className="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
         <Link href="/" passHref>
           <a className="mr-5 hover:text-white">Home</a>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/about" passHref>
           <a className="mr-5 hover:text-white">About</a>
         </Link>
-        <Link href="/" passHref>
-          <a className="mr-5 hover:text-white">Repos</a>
+        <Link href="/repos" passHref>
+          <a className="mr-5 hover:text-white">My repos</a>
+        </Link>
+        <Link href="/how-to-use" passHref>
+          <a className="mr-5 hover:text-white">How to use?</a>
         </Link>
       </nav>
       <Link href="/" passHref>

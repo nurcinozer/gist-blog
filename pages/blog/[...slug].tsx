@@ -26,7 +26,7 @@ export const BlogInner: React.FC<BlogInnerProps> = ({
   }
 
   return (
-    <Layout>
+    <>
       <InnerCard
         comments={gist.comments}
         rawContent={rawContent}
@@ -35,9 +35,7 @@ export const BlogInner: React.FC<BlogInnerProps> = ({
       />
       {
         comments.length > 0 && (
-          <div className='mt-10'>
-            <h1 className='text-2xl font-bold text-gray-500'>Comments</h1>
-          </div>
+          <h1 className='text-2xl font-bold text-white text-center'>Comments</h1>
         )
       }
       {
@@ -51,7 +49,7 @@ export const BlogInner: React.FC<BlogInnerProps> = ({
           />
         ))
       }
-    </Layout>
+    </>
   )
 }
 

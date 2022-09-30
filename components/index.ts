@@ -7,3 +7,6 @@ export * from "./Card";
 export * from "./List";
 export * from "./Comment";
 export * from "./Spinner";
+export * from "./Footer";
+export * from "./Table";
+export * from "./Statistic";

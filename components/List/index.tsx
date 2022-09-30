@@ -17,7 +17,7 @@ export const List: React.FC<ListProps> = ({
   }
 
   return (
-    <div className='py-5 overflow-hidden'>
+    <div className='pb-20 overflow-hidden'>
       {
         data.slice(0, next).map((gist, index) => {
           return (

@@ -30,6 +30,21 @@ export interface User {
   avatar_url: string;
 }
 
+export interface UserDetail {
+  name: string;
+  company: string;
+  blog: string;
+  location: string;
+  email: string;
+  bio: string;
+  public_repos: number;
+  public_gists: number;
+  followers: number;
+  following: number;
+  hireable: boolean;
+  twitter_username: string;
+}
+
 export interface Comment {
   id: string;
   body: string;
@@ -63,4 +78,11 @@ export const getCommentsByFilename = async (filename: string) => {
     headers: HEADER,
   }).then((res) => res.json());
   return comments;
+};
+
+export const getGithubUser = async () => {
+  const res = await fetch(`https://api.github.com/users/${GITHUB_NAME}`, {
+    headers: HEADER,
+  }).then((res) => res.json());
+  return res;
 };

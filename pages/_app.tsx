@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useEffect, useState } from 'react';
+import { Layout } from '../components';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
@@ -16,7 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     return <></>;
   } else {
 
-    return <Component {...pageProps} />
+    return (
+      <Layout title="Github based blog">
+        <Component {...pageProps} />
+      </Layout>
+    )
   }
 }
 

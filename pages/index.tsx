@@ -23,7 +23,7 @@ const Home: React.FC<HomeProps> = ({
   }
 
   return (
-    <Layout>
+    <>
       {
         getMarkDownFiles.length > 0 ? (
           <List data={getMarkDownFiles} />
@@ -33,7 +33,7 @@ const Home: React.FC<HomeProps> = ({
           </div>
         )
       }
-    </Layout>
+    </>
   )
 }
 
