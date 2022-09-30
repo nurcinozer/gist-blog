@@ -1,10 +1,11 @@
 import { RightArrow } from "../Icons"
 import matter from "gray-matter"
 import Link from "next/link"
-import { convertDate, getFileNameWithoutExtension, readingTime } from "../../utils/functions"
+import { convertDate, fetchRawUrl, getFileNameWithoutExtension, readingTime } from "../../utils/functions"
 import { Gist } from "../../utils/services"
-import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 import { CommentIcon } from "../Icons/CommentIcon"
+import md from 'markdown-it';
+import { useState, useEffect, useMemo } from "react"
 
 type DataProps = {
   title?: string
@@ -14,14 +15,22 @@ type DataProps = {
 
 const Card: React.FC<
   Pick<Gist, "description" | "created_at" | "files"> & {
-    rawContent: string
+    rawUrl: string
   }
 > = ({
   files,
-  rawContent,
+  rawUrl,
   description,
   created_at,
 }) => {
+    const [rawContent, setRawContent] = useState('');
+
+    useMemo(() => {
+      fetchRawUrl(rawUrl).then((rawContent) => {
+        setRawContent(rawContent)
+      })
+    }, [rawUrl])
+
     const { data } = matter(rawContent);
 
     const { title, category, date } = data as DataProps;
@@ -73,9 +82,11 @@ const InnerCard: React.FC<
           </h2>
           <h1 className="title-font text-center text-4xl font-medium text-white mb-3">{title || "No title"}</h1>
           <p className="leading-relaxed p-5">
-            <ReactMarkdown>
-              {content}
-            </ReactMarkdown>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: md().render(content),
+              }}
+            />
           </p>
           <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
             <span className="text-gray-500 inline-flex items-center leading-none text-sm">

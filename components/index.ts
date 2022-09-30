@@ -5,3 +5,5 @@ export * from "./Button";
 export * from "./Meta";
 export * from "./Card";
 export * from "./List";
+export * from "./Comment";
+export * from "./Spinner";

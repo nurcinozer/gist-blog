@@ -1,34 +1,43 @@
-import { useState } from "react"
-import { Card } from ".."
-import { fetchRawUrl } from "../../utils/functions"
+import { useState } from "react";
+import { Button, Card } from ".."
 import { Gist } from "../../utils/services"
 
 type ListProps = {
   data: Gist[],
 }
 
+const LIMIT = 5;
+
 export const List: React.FC<ListProps> = ({
   data
 }) => {
-  const [rawContent, setRawContent] = useState('');
+  const [next, setNext] = useState(LIMIT);
+  const fetchMore = () => {
+    setNext(next + LIMIT)
+  }
 
   return (
     <div className='py-5 overflow-hidden'>
       {
-        data.map((gist, index) => {
-          fetchRawUrl(gist.files[Object.keys(gist.files)[0]].raw_url)
-            .then(res => setRawContent(res))
+        data.slice(0, next).map((gist, index) => {
           return (
             <Card
               key={index}
               files={gist.files}
-              rawContent={rawContent}
+              rawUrl={gist.files[Object.keys(gist.files)[0]].raw_url}
               description={gist.description}
               created_at={gist.created_at}
             />
           )
         })
       }
+      <div className='flex justify-center mt-10'>
+        {
+          next < data.length && (
+            <Button size="large" onClick={() => fetchMore()}>Load More</Button>
+          )
+        }
+      </div>
     </div>
   )
 }
