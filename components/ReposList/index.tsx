@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button, Card, RepoCard } from ".."
-import { Gist, Repo } from "../../utils/services"
+import { Button, RepoCard } from ".."
+import { Repo } from "../../utils/services"
 
 type ReposProps = {
   data: Repo[],

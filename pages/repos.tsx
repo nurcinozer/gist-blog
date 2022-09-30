@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useMemo, useState } from 'react';
-import { Layout, List, Spinner, ReposList } from '../components'
-import { getGists, getRepos, Gist, Repo } from '../utils/services';
+import { Spinner, ReposList } from '../components'
+import { getRepos, Repo } from '../utils/services';
 
 type RepoProps = {
   repos: Repo[]

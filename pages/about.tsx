@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
-import { Button, Layout, List, Spinner, Statistic, Table } from '../components'
-import { getGists, getGithubUser, getUserAvatar, Gist, User, UserDetail } from '../utils/services';
+import { useState } from 'react';
+import { Button, Spinner, Statistic, Table } from '../components'
+import { getGithubUser, getUserAvatar, UserDetail } from '../utils/services';
 
 
 const About: React.FC<{ data: UserDetail, avatar: string }> = ({

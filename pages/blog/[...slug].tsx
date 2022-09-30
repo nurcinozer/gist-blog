@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
-import { Comment as CommentCard, InnerCard, Layout, Spinner } from "../../components";
+import { Comment as CommentCard, InnerCard, Spinner } from "../../components";
 import { fetchRawUrl } from "../../utils/functions";
 import { getCommentsByFilename, getGistByFilename, Gist, Comment } from "../../utils/services";
 

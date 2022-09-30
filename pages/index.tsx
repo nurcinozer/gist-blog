@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { useMemo, useState } from 'react';
-import { Layout, List, Spinner } from '../components'
+import { List, Spinner } from '../components'
 import { getGists, Gist } from '../utils/services';
 
 type HomeProps = {
