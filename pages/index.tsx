@@ -13,6 +13,7 @@ const Home: React.FC<HomeProps> = ({
   const [loading, setLoading] = useState(true);
 
   const getMarkDownFiles = useMemo(() => {
+    if (!gists) return [];
     const filteredGists = gists.filter(gist => gist.files[Object.keys(gist.files)[0]].language === 'Markdown');
     setLoading(false);
     return filteredGists;
