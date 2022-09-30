@@ -33,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
         <Button
           variant="secondary"
+          onClick={() => window.open("https://github.com/nurcinozer/gist-blog", "_blank")}
         >
           Open in Github
           <RightArrow />

@@ -38,6 +38,14 @@ const stepList = [
 const HowToUse = () => {
   return (
     <div className="flex flex-wrap pb-20">
+      <div className="flex flex-col text-center w-full mb-10">
+        <h2 className="text-xs text-indigo-400 tracking-widest font-medium title-font mb-1">
+          HOW TO USE
+        </h2>
+        <h1 className="sm:text-3xl text-2xl font-medium title-font text-white">
+          How to use GitHub Gist Blog?
+        </h1>
+      </div>
       <Step
         steps={stepList}
       />
