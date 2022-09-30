@@ -55,6 +55,8 @@ title: "Post title"
 category: "Post category"
 date: "2020-01-01"
 ---
+
+Your content here
 ```
 
 ## Tech Stack
@@ -78,3 +80,7 @@ Give a ⭐️ if this project helped you!
 
 - [Github Blog](https://github.com/bufgix/github-blog)
 - [React Blog Github](https://github.com/saadpasta/react-blog-github)
+
+```
+
+```
