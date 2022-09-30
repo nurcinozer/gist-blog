@@ -1,34 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gist Based Blog
 
-## Getting Started
+## Nextjs + Portfolio and Biography from Github + Posts from Gist ➡️ Your Personal Blog 🥳
 
-First, run the development server:
+This blog system get all informations from Github and Gist.
+
+## Demo
+
+🚀 https://gist-based-blog.vercel.app/
+
+## How to use
+
+1. Clone the repo
+   First, clone the repo and install the dependencies.
+
+```bash
+git clone
+cd gist-based-blog
+npm install
+```
+
+2. Add your GitHub token
+   Create a new file called `.env` in the root of the project and add your GitHub token.
+
+```bash
+GITHUB_TOKEN=YOUR_TOKEN
+```
+
+3. Add your GitHub username
+   Open the `utils/services.ts` file and add your GitHub username.
+
+```ts
+const GITHUB_NAME = "YOUR_USERNAME";
+```
+
+4. Run the project
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open the project
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## How to create a post
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Create a new gist with markdown extension (`.md`) and add this format for the metadata:
 
-## Learn More
+```md
+---
+title: "Post title"
+category: "Post category"
+date: "2020-01-01"
+---
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Contributions, issues and feature requests are welcome!
+Feel free to check [issues page](https://github.com/nurcinozer/gist-blog/issues).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Show your support
 
-## Deploy on Vercel
+Give a ⭐️ if this project helped you!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Inspiration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Github Blog](https://github.com/bufgix/github-blog)
+- [React Blog Github](https://github.com/saadpasta/react-blog-github)

@@ -14,7 +14,7 @@ const stepList = [
     content: 'Then, add your GitHub token to the .env file. You can get your GitHub token from here: https://github.com/settings/tokens You need to add required scopes to your token.'
   },
   {
-    title: 'Change github username',
+    title: 'Change GitHub username',
     content: 'Change github username in the utils/service.ts file.'
   },
   {
@@ -27,7 +27,7 @@ const stepList = [
   },
   {
     title: 'Add your blog posts',
-    content: 'You can add your blog posts by creating a new gist. You can add metadata to your gist by adding YAML front matter to your gist. You can see the example gist here: https://gist.github.com/nurcinozer/d819cdf7004a17c1a18bc20e0781e299'
+    content: 'You can add your blog posts by creating a markdown extension file in gist.  new gist. You can add metadata to your gist by adding YAML front matter to your gist. You can see the example gist here: https://gist.github.com/nurcinozer/d819cdf7004a17c1a18bc20e0781e299'
   },
   {
     title: 'Yay! Your blog posts are ready to go! 🥳',
