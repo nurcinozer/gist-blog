@@ -2,7 +2,7 @@
 
 ## Nextjs + Portfolio and Biography from Github + Posts from Gist ➡️ Your Personal Blog 🥳
 
-This blog system get all informations from Github and Gist.
+This blog system gets all informations from Github and Gist.
 
 ## Demo
 
@@ -10,23 +10,23 @@ This blog system get all informations from Github and Gist.
 
 ## How to use
 
-1. Clone the repo
+1. Clone the repo.
    First, clone the repo and install the dependencies.
 
 ```bash
-git clone
+git clone https://github.com/nurcinozer/gist-blog.git .
 cd gist-based-blog
 npm install
 ```
 
-2. Add your GitHub token
+2. Add your GitHub token.
    Create a new file called `.env` in the root of the project and add your GitHub token.
 
 ```bash
 GITHUB_TOKEN=YOUR_TOKEN
 ```
 
-3. Add your GitHub username
+3. Add your GitHub username.
    Open the `utils/services.ts` file and add your GitHub username.
 
 ```ts
@@ -53,7 +53,7 @@ http://localhost:3000
 ---
 title: "Post title"
 category: "Post category"
-date: "2020-01-01"
+date: "29 May 2021"
 ---
 
 Your content here
@@ -69,8 +69,10 @@ Your content here
 
 ## Contributing
 
+This project is `hacktoberfest` friendly 🎉
+
 Contributions, issues and feature requests are welcome!
-Feel free to check [issues page](https://github.com/nurcinozer/gist-blog/issues).
+Feel free to check [issues page](https://github.com/nurcinozer/gist-blog/issues) and [contributing page](https://github.com/nurcinozer/gist-blog/blob/main/CONTRIBUTING.md) if you want to contribute.
 
 ## Show your support
 
