@@ -93,7 +93,7 @@ const InnerCard: React.FC<
   const { title, category, date } = data as DataProps;
 
   return (
-    <div className="prose lg:prose-xl prose-invert w-full pb-20 bg-gray-800 bg-opacity-40 px-8 py-16 rounded-lg mx-auto">
+    <div className="prose lg:prose-xl prose-invert w-full mb-20 bg-gray-800 bg-opacity-40 px-8 py-16 rounded-lg mx-auto">
       <h6 className="tracking-widest text-xs title-font text-center font-medium text-gray-500 mb-1">
         {category?.toUpperCase() || "NO CATEGORY"} • {readingTime(content)} •{" "}
         {convertDate(created_at) || date}
