@@ -1,4 +1,4 @@
-const GITHUB_NAME = "nurcinozer";
+const GITHUB_NAME = "bufgix";
 
 const HEADER = {
   Authorization: `token ${process.env.GITHUB_TOKEN}`,
