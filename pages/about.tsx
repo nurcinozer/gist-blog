@@ -33,11 +33,11 @@ const About: React.FC<{ data: UserDetail, avatar: string }> = ({
             <div className="lg:w-4/5 pb-20 flex flex-wrap mx-auto">
               <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 lg:mr-24">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">ABOUT</h2>
-                <h1 className="text-white text-3xl title-font font-medium mb-4">{data.name}</h1>
+                <h1 className="text-gray-900 dark:text-white text-3xl title-font font-medium mb-4">{data.name}</h1>
                 <div className="flex mb-4">
                   <a className="flex-grow text-indigo-400 border-b-2 border-indigo-500 py-2 text-lg px-1">Biography</a>
                 </div>
-                <p className="leading-relaxed mb-4">
+                <p className="leading-relaxed mb-4 text-gray-600 dark:text-gray-400">
                   {data.bio || 'No bio'}
                 </p>
                 <Table data={data} />

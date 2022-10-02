@@ -115,11 +115,11 @@ const RepoCard: React.FC<Pick<Repo, "description" | "html_url" | "name">> = ({
   name: title,
 }) => {
   return (
-    <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-800 mb-10">
-      <h2 className="text-lg sm:text-xl text-white font-medium title-font mb-2">
+    <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 dark:border-gray-800 mb-10">
+      <h2 className="text-lg sm:text-xl text-gray-900 dark:text-white font-medium title-font mb-2">
         {title}
       </h2>
-      <p className="leading-relaxed text-base mb-4">{description}</p>
+      <p className="leading-relaxed text-base mb-4 text-gray-600 dark:text-gray-400">{description}</p>
       <Link href={`${html_url}`}>
         <a
           className="text-indigo-400 inline-flex items-center mt-4"
