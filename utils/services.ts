@@ -1,3 +1,5 @@
+import { slugify } from "./helpers";
+
 const GITHUB_NAME = "bufgix";
 
 const HEADER = {
@@ -10,6 +12,13 @@ export interface Repo {
   html_url: string;
   updated_at: string;
 }
+
+export type MetaData = {
+  title?: string;
+  category?: string;
+  date?: string;
+  tags?: string;
+};
 
 export interface File {
   [key: string]: {
@@ -30,6 +39,10 @@ export interface Gist {
   created_at: string;
   comments: number;
   comments_url: string;
+  markdownFileName: string;
+  rawContent: string;
+  rawUrl: string;
+  title: string;
 }
 
 export interface User {
@@ -67,39 +80,54 @@ export const getRepos = async () => {
   return res.json();
 };
 
-export const getGists = async () => {
-  const res = await fetch(`https://api.github.com/users/${GITHUB_NAME}/gists`, {
+export async function getGists(): Promise<Gist[]> {
+  return fetch(`https://api.github.com/users/${GITHUB_NAME}/gists`, {
     headers: HEADER,
   }).then((res) => res.json());
-  return res;
+}
+
+export const getMarkdownGists = async () => {
+  const gists = await getGists();
+  return gists
+    .filter((gist) => {
+      return Object.keys(gist.files).some((key) => {
+        return gist.files[key].type === "text/markdown";
+      });
+    })
+    .map((gist) => {
+      const file = Object.keys(gist.files)[0];
+      const firstFileName = file.split(".")[0];
+      const rawUrl = gist.files[file].raw_url;
+      return {
+        ...gist,
+        markdownFileName: slugify(firstFileName),
+        rawUrl,
+        title: firstFileName,
+      };
+    });
 };
 
 export const getGistById = async (id: string) => {
-  const res = await fetch(`https://api.github.com/gists/${id}`, {
+  return await fetch(`https://api.github.com/gists/${id}`, {
     headers: HEADER,
   }).then((res) => res.json());
-  return res;
 };
 
 export const getGistByFilename = async (filename: string) => {
   const gists = await getGists();
-  const gist = gists.find((gist: Gist) => gist.files[filename]);
-  return gist;
+  return gists.find((gist: Gist) => gist.files[filename]);
 };
 
-export const getCommentsByFilename = async (filename: string) => {
-  const gist = await getGistByFilename(filename);
-  const comments = await fetch(gist.comments_url, {
+export const getCommentsByGist = async (gist: Gist): Promise<Comment[]> => {
+  return await fetch(gist.comments_url, {
     headers: HEADER,
   }).then((res) => res.json());
-  return comments;
 };
 
 export const getGithubUser = async () => {
-  const res = await fetch(`https://api.github.com/users/${GITHUB_NAME}`, {
+  return await fetch(`https://api.github.com/users/${GITHUB_NAME}`, {
     headers: HEADER,
   }).then((res) => res.json());
-  return res;
 };
 
 export const getUserAvatar = async () => {
