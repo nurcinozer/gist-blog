@@ -12,3 +12,4 @@ export * from "./Table";
 export * from "./Statistic";
 export * from "./ReposList";
 export * from "./Step";
+export * from "./Toggle";
