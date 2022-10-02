@@ -1,8 +1,14 @@
-import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon } from '..'
+import { useTheme } from "next-themes";
+import { useEffect } from "react";
+import { MoonIcon, SunIcon } from "..";
 
 export const Toggle = () => {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
+
+  // set theme dark on load
+  useEffect(() => {
+    setTheme("dark");
+  }, [setTheme]);
 
   return (
     <button
