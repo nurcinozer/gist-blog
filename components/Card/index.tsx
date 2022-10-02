@@ -101,11 +101,11 @@ const InnerCard: React.FC<
         {convertDate(created_at) || date}
       </h6>
       <h1 className="text-center mb-2">{title}</h1>
-      <div className="flex justify-center mt-3">
+      <div className="flex justify-center mt-5 flex-wrap gap-2">
         {tags?.split(",").map((tag, index) => (
           <div
             className={
-              "mr-2 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full bg-white text-gray-700 border"
+              "text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full bg-white text-gray-700 border"
             }
             key={index}
           >
