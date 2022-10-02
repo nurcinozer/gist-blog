@@ -35,7 +35,7 @@ export const BlogInner: React.FC<BlogInnerProps> = ({
       />
       {
         comments.length > 0 && (
-          <h1 className='text-2xl font-bold text-white text-center'>Comments</h1>
+          <h1 className='text-2xl font-bold dark:text-white text-gray-600 text-center'>Comments</h1>
         )
       }
       {

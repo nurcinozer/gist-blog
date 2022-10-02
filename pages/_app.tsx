@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useEffect, useState } from 'react';
 import { Layout } from '../components';
+import { ThemeProvider } from 'next-themes'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
@@ -18,9 +19,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   } else {
 
     return (
-      <Layout title="Github based blog">
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider attribute="class">
+        <Layout title="Github based blog">
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     )
   }
 }
