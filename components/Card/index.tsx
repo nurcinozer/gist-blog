@@ -33,6 +33,7 @@ type DataProps = {
   title?: string;
   category?: string;
   date?: string;
+  tags?: string;
 };
 
 const Card: React.FC<
@@ -88,10 +89,10 @@ const InnerCard: React.FC<
   Pick<Gist, "comments" | "created_at"> & {
     rawContent: string;
   }
-> = ({ rawContent, comments, created_at }) => {
+> = ({ rawContent, created_at }) => {
   const { data, content } = matter(rawContent);
 
-  const { title, category, date } = data as DataProps;
+  const { title, category, date, tags } = data as DataProps;
 
   return (
     <div className="prose lg:prose-xl prose-invert w-full mb-20 bg-gray-800 bg-opacity-40 px-8 py-16 rounded-lg mx-auto">
@@ -100,6 +101,18 @@ const InnerCard: React.FC<
         {convertDate(created_at) || date}
       </h6>
       <h1 className="text-center mb-2">{title}</h1>
+      <div className="flex justify-center mt-3">
+        {tags?.split(",").map((tag, index) => (
+          <div
+            className={
+              "mr-2 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full bg-white text-gray-700 border"
+            }
+            key={index}
+          >
+            # {tag}
+          </div>
+        ))}
+      </div>
       <div
         dangerouslySetInnerHTML={{
           __html: MarkdownRenderer.render(content),
