@@ -21,7 +21,6 @@ const Home = ({ articles }: HomeProps) => {
 
 export async function getStaticProps() {
   const markdownGists = await getMarkdownGists();
-
   return {
     props: {
       articles: markdownGists,

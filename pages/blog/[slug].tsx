@@ -18,7 +18,7 @@ type Props = {
 export const BlogInner = ({ article, comments }: Props) => {
   return (
     <>
-      <InnerCard key={article.id} article={article} />
+      <InnerCard  article={article} />
       {comments.length > 0 && (
         <h1 className="text-2xl font-bold dark:text-white text-gray-600 text-center">
           Comments
@@ -28,7 +28,6 @@ export const BlogInner = ({ article, comments }: Props) => {
         <CommentCard
           avatar_url={`https://github.com/${comment.user.login}.png`}
           comment={comment.body}
-          key={comment.id}
           created_at={comment.created_at}
           username={comment.user.login}
         />
@@ -63,7 +62,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
   return {
     paths,
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
