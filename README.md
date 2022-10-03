@@ -19,27 +19,21 @@ cd gist-based-blog
 npm install
 ```
 
-2. Add your GitHub token.
+2. Add your GitHub token and username.
    Create a new file called `.env` in the root of the project and add your GitHub token.
 
 ```bash
 GITHUB_TOKEN=YOUR_TOKEN
+GITHUB_NAME=YOUR_GITHUB_USERNAME
 ```
 
-3. Add your GitHub username.
-   Open the `utils/services.ts` file and add your GitHub username.
-
-```ts
-const GITHUB_NAME = "YOUR_USERNAME";
-```
-
-4. Run the project
+3. Run the project
 
 ```bash
 npm run dev
 ```
 
-5. Open the project
+4. Open the project
 
 ```bash
 http://localhost:3000
@@ -51,9 +45,7 @@ http://localhost:3000
 
 ```md
 ---
-title: "Post title"
 category: "Post category"
-date: "29 May 2021"
 ---
 
 Your content here

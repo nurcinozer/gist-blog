@@ -1,14 +1,11 @@
-import Link from "next/link"
-import { Button, LogoIcon, RightArrow, Toggle } from ".."
+import Link from "next/link";
+import { Button, LogoIcon, RightArrow, Toggle } from "..";
 
 type HeaderProps = {
-  title: string
-}
+  title: string;
+};
 
-export const Header: React.FC<HeaderProps> = ({
-  title,
-}) => {
-
+export const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <div className="dark:text-gray-400 text-gray-600 flex flex-wrap flex-col md:flex-row items-center pt-3 pb-20">
       <nav className="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
@@ -16,13 +13,19 @@ export const Header: React.FC<HeaderProps> = ({
           <a className="mr-5 dark:hover:text-white hover:text-gray-900">Home</a>
         </Link>
         <Link href="/about" passHref>
-          <a className="mr-5 dark:hover:text-white hover:text-gray-900">About</a>
+          <a className="mr-5 dark:hover:text-white hover:text-gray-900">
+            About
+          </a>
         </Link>
         <Link href="/repos" passHref>
-          <a className="mr-5 dark:hover:text-white hover:text-gray-900">My repos</a>
+          <a className="mr-5 dark:hover:text-white hover:text-gray-900">
+            My repos
+          </a>
         </Link>
         <Link href="/how-to-use" passHref>
-          <a className="mr-5 dark:hover:text-white hover:text-gray-900">How to use?</a>
+          <a className="mr-5 dark:hover:text-white hover:text-gray-900">
+            How to use?
+          </a>
         </Link>
       </nav>
       <Link href="/" passHref>
@@ -34,13 +37,14 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0 items-center">
         <Button
           variant="secondary"
-          onClick={() => window.open("https://github.com/nurcinozer/gist-blog", "_blank")}
-        >
+          onClick={() =>
+            window.open("https://github.com/nurcinozer/gist-blog", "_blank")
+          }>
           Open in Github
           <RightArrow />
         </Button>
         <Toggle />
       </div>
     </div>
-  )
-}
+  );
+};
