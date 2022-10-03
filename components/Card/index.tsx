@@ -22,7 +22,7 @@ const MarkdownRenderer = md({
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(str, { language: lang }).value;
-      } catch (__) { }
+      } catch (__) {}
     }
 
     return "";
@@ -33,6 +33,7 @@ type DataProps = {
   title?: string;
   category?: string;
   date?: string;
+  tags?: string;
 };
 
 const Card: React.FC<
@@ -72,7 +73,9 @@ const Card: React.FC<
             {title || "No title"}
           </a>
         </Link>
-        <p className="leading-relaxed mt-2 text-gray-600 dark:text-gray-400">{description}</p>
+        <p className="leading-relaxed mt-2 text-gray-600 dark:text-gray-400">
+          {description}
+        </p>
         <Link href={`/blog/${fileName}`}>
           <a className="text-indigo-400 inline-flex items-center mt-4">
             Learn More
@@ -88,10 +91,10 @@ const InnerCard: React.FC<
   Pick<Gist, "comments" | "created_at"> & {
     rawContent: string;
   }
-> = ({ rawContent, comments, created_at }) => {
+> = ({ rawContent, created_at }) => {
   const { data, content } = matter(rawContent);
 
-  const { title, category, date } = data as DataProps;
+  const { title, category, date, tags } = data as DataProps;
 
   return (
     <div className="prose lg:prose-xl dark:prose-invert w-full mb-20 dark:bg-gray-800 bg-gray-100 bg-opacity-40 px-8 py-16 rounded-lg mx-auto dark:text-gray-400 text-gray-600">
@@ -99,7 +102,22 @@ const InnerCard: React.FC<
         {category?.toUpperCase() || "NO CATEGORY"} • {readingTime(content)} •{" "}
         {convertDate(created_at) || date}
       </h6>
-      <h1 className="text-center mb-2 dark:text-white text-gray-900">{title}</h1>
+      <h1 className="text-center mb-2 dark:text-white text-gray-900">
+        {title}
+      </h1>
+      <div className="flex justify-center mt-5 flex-wrap gap-2">
+        {tags?.split(",").map((tag, index) => (
+          <div
+            className={
+              "text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full  bg-white text-gray-700  border"
+            }
+            key={index}
+          >
+            # {tag}
+          </div>
+        ))}
+      </div>
+
       <div
         dangerouslySetInnerHTML={{
           __html: MarkdownRenderer.render(content),
@@ -119,7 +137,9 @@ const RepoCard: React.FC<Pick<Repo, "description" | "html_url" | "name">> = ({
       <h2 className="text-lg sm:text-xl text-gray-900 dark:text-white font-medium title-font mb-2">
         {title}
       </h2>
-      <p className="leading-relaxed text-base mb-4 text-gray-600 dark:text-gray-400">{description}</p>
+      <p className="leading-relaxed text-base mb-4 text-gray-600 dark:text-gray-400">
+        {description}
+      </p>
       <Link href={`${html_url}`}>
         <a
           className="text-indigo-400 inline-flex items-center mt-4"
