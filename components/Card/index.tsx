@@ -1,18 +1,10 @@
-import { RightArrow } from "../Icons";
-import matter from "gray-matter";
 import Link from "next/link";
-import {
-  convertDate,
-  fetchRawUrl,
-  getFileNameWithoutExtension,
-  readingTime,
-} from "../../utils/functions";
-import { Gist, Repo } from "../../utils/services";
 import md from "markdown-it";
-import { useState, useMemo } from "react";
 import hljs from "highlight.js";
-
 import "highlight.js/styles/atom-one-dark.css";
+
+import { RightArrow } from "../Icons";
+import { Gist, Repo } from "../../utils/services";
 
 const MarkdownRenderer = md({
   html: true,
@@ -29,33 +21,14 @@ const MarkdownRenderer = md({
   },
 });
 
-type DataProps = {
-  title?: string;
-  category?: string;
-  date?: string;
-  tags?: string;
-};
-
-const Card: React.FC<
-  Pick<Gist, "description" | "created_at" | "files"> & {
-    rawUrl: string;
-  }
-> = ({ files, rawUrl, description, created_at }) => {
-  const [rawContent, setRawContent] = useState("");
-
-  useMemo(() => {
-    fetchRawUrl(rawUrl).then((rawContent) => {
-      setRawContent(rawContent);
-    });
-  }, [rawUrl]);
-
-  const { data } = matter(rawContent);
-
-  const { title, category, date } = data as DataProps;
-
-  const fileName = getFileNameWithoutExtension(
-    files[Object.keys(files)[0]].filename
-  );
+const Card = ({
+  markdownFileName,
+  description,
+  articleDate,
+  title,
+  metaData,
+}: Gist) => {
+  const { category, date } = metaData;
 
   return (
     <div className="py-8 flex border-t-2 dark:border-gray-800 border-gray-100 flex-wrap md:flex-nowrap">
@@ -64,11 +37,11 @@ const Card: React.FC<
           {category?.toUpperCase() || "NO CATEGORY"}
         </span>
         <span className="mt-1 text-gray-500 text-sm">
-          {convertDate(created_at) || date}
+          {articleDate || date}
         </span>
       </div>
       <div className="md:flex-grow">
-        <Link href={`/blog/${fileName}`}>
+        <Link href={`/blog/${markdownFileName}`}>
           <a className="text-2xl font-medium dark:text-white title-font text-gray-900">
             {title || "No title"}
           </a>
@@ -76,7 +49,7 @@ const Card: React.FC<
         <p className="leading-relaxed mt-2 text-gray-600 dark:text-gray-400">
           {description}
         </p>
-        <Link href={`/blog/${fileName}`}>
+        <Link href={`/blog/${markdownFileName}`}>
           <a className="text-indigo-400 inline-flex items-center mt-4">
             Learn More
             <RightArrow currentColor="#6366f1" />
@@ -87,26 +60,24 @@ const Card: React.FC<
   );
 };
 
-const InnerCard: React.FC<
-  Pick<Gist, "comments" | "created_at"> & {
-    rawContent: string;
-  }
-> = ({ rawContent, created_at }) => {
-  const { data, content } = matter(rawContent);
-
-  const { title, category, date, tags } = data as DataProps;
+const InnerCard = ({
+  article: { articleDate, markdownContent, title, metaData, readingTime },
+}: {
+  article: Gist;
+}) => {
+  const { category, date, tags } = metaData;
 
   return (
     <div className="prose lg:prose-xl dark:prose-invert w-full mb-20 dark:bg-gray-800 bg-gray-100 bg-opacity-40 px-8 py-16 rounded-lg mx-auto dark:text-gray-400 text-gray-600">
       <h6 className="tracking-widest text-xs title-font text-center font-medium dark:text-gray-500 text-gray-400 mb-1">
-        {category?.toUpperCase() || "NO CATEGORY"} • {readingTime(content)} •{" "}
-        {convertDate(created_at) || date}
+        {category?.toUpperCase() || "NO CATEGORY"} • {readingTime} •{" "}
+        {articleDate || date}
       </h6>
       <h1 className="text-center mb-2 dark:text-white text-gray-900">
         {title}
       </h1>
       <div className="flex justify-center mt-5 flex-wrap gap-2">
-        {tags?.split(",").map((tag, index) => (
+        {tags?.map((tag, index) => (
           <div
             className={
               "text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full  bg-white text-gray-700  border"
@@ -120,7 +91,7 @@ const InnerCard: React.FC<
 
       <div
         dangerouslySetInnerHTML={{
-          __html: MarkdownRenderer.render(content),
+          __html: MarkdownRenderer.render(markdownContent),
         }}
       />
     </div>

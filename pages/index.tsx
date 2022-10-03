@@ -1,59 +1,31 @@
-import { GetServerSideProps } from 'next';
-import { useMemo, useState } from 'react';
-import { List, Spinner } from '../components'
-import { getGists, Gist } from '../utils/services';
+import { List } from "../components";
+import { getMarkdownGists, Gist } from "../utils/services";
 
 type HomeProps = {
-  gists: Gist[]
-}
+  articles: Gist[];
+};
 
-const Home: React.FC<HomeProps> = ({
-  gists
-}) => {
-  const [loading, setLoading] = useState(true);
-
-  const getMarkDownFiles = useMemo(() => {
-    if (!gists) return [];
-    const filteredGists = gists.filter(gist => gist.files[Object.keys(gist.files)[0]].language === 'Markdown');
-    setLoading(false);
-    return filteredGists;
-  }, [gists])
-
-  if (loading) {
-    return <Spinner />
-  }
-
+const Home = ({ articles }: HomeProps) => {
   return (
     <>
-      {
-        getMarkDownFiles.length > 0 ? (
-          <List data={getMarkDownFiles} />
-        ) : (
-          <div className='flex justify-center items-center h-screen'>
-            <h1 className='text-2xl font-bold text-gray-500'>No Gists Found</h1>
-          </div>
-        )
-      }
+      {articles.length > 0 ? (
+        <List data={articles} />
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <h1 className="text-2xl font-bold text-gray-500">No Gists Found</h1>
+        </div>
+      )}
     </>
-  )
+  );
+};
+
+export async function getStaticProps() {
+  const markdownGists = await getMarkdownGists();
+  return {
+    props: {
+      articles: markdownGists,
+    },
+  };
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-    const gists = await getGists();
-
-    return {
-      props: {
-        gists
-      }
-
-    }
-  } catch (error) {
-    return {
-      props: {}
-    }
-  }
-}
-
-
-export default Home
+export default Home;
