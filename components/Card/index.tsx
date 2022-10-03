@@ -1,17 +1,10 @@
-import { RightArrow } from "../Icons";
-import matter from "gray-matter";
 import Link from "next/link";
-import {
-  convertDate,
-  getFileNameWithoutExtension,
-  readingTime,
-} from "../../utils/functions";
-import { Gist, MetaData, Repo } from "../../utils/services";
 import md from "markdown-it";
-import { useState } from "react";
 import hljs from "highlight.js";
-
 import "highlight.js/styles/atom-one-dark.css";
+
+import { RightArrow } from "../Icons";
+import { Gist, Repo } from "../../utils/services";
 
 const MarkdownRenderer = md({
   html: true,
@@ -28,29 +21,14 @@ const MarkdownRenderer = md({
   },
 });
 
-type DataProps = {
-  title?: string;
-  category?: string;
-  date?: string;
-  tags?: string;
-};
-
 const Card = ({
-  files,
   markdownFileName,
   description,
-  created_at,
+  articleDate,
   title,
+  metaData,
 }: Gist) => {
-  const [rawContent, setRawContent] = useState("");
-
-  const { data } = matter(rawContent);
-
-  const { category, date } = data as DataProps;
-
-  const fileName = getFileNameWithoutExtension(
-    files[Object.keys(files)[0]].filename
-  );
+  const { category, date } = metaData;
 
   return (
     <div className="py-8 flex border-t-2 dark:border-gray-800 border-gray-100 flex-wrap md:flex-nowrap">
@@ -59,11 +37,11 @@ const Card = ({
           {category?.toUpperCase() || "NO CATEGORY"}
         </span>
         <span className="mt-1 text-gray-500 text-sm">
-          {convertDate(created_at) || date}
+          {articleDate || date}
         </span>
       </div>
       <div className="md:flex-grow">
-        <Link href={`/blog/${fileName}`}>
+        <Link href={`/blog/${markdownFileName}`}>
           <a className="text-2xl font-medium dark:text-white title-font text-gray-900">
             {title || "No title"}
           </a>
@@ -83,25 +61,23 @@ const Card = ({
 };
 
 const InnerCard = ({
-  article: { created_at, rawContent, title },
-  articleMetadata,
+  article: { articleDate, markdownContent, title, metaData, readingTime },
 }: {
   article: Gist;
-  articleMetadata: MetaData;
 }) => {
-  const { category, date, tags } = articleMetadata;
+  const { category, date, tags } = metaData;
 
   return (
     <div className="prose lg:prose-xl dark:prose-invert w-full mb-20 dark:bg-gray-800 bg-gray-100 bg-opacity-40 px-8 py-16 rounded-lg mx-auto dark:text-gray-400 text-gray-600">
       <h6 className="tracking-widest text-xs title-font text-center font-medium dark:text-gray-500 text-gray-400 mb-1">
-        {category?.toUpperCase() || "NO CATEGORY"} • {readingTime(rawContent)} •{" "}
-        {convertDate(created_at) || date}
+        {category?.toUpperCase() || "NO CATEGORY"} • {readingTime} •{" "}
+        {articleDate || date}
       </h6>
       <h1 className="text-center mb-2 dark:text-white text-gray-900">
         {title}
       </h1>
       <div className="flex justify-center mt-5 flex-wrap gap-2">
-        {tags?.split(",").map((tag, index) => (
+        {tags?.map((tag, index) => (
           <div
             className={
               "text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full  bg-white text-gray-700  border"
@@ -115,7 +91,7 @@ const InnerCard = ({
 
       <div
         dangerouslySetInnerHTML={{
-          __html: MarkdownRenderer.render(rawContent),
+          __html: MarkdownRenderer.render(markdownContent),
         }}
       />
     </div>

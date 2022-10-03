@@ -14,7 +14,7 @@ export const convertDate = (date: string) => {
   return `${day} ${month} ${year}`;
 };
 
-export const readingTime = (text: string) => {
+export const calculateReadingTime = (text: string) => {
   const wordsPerMinute = 200;
   const noOfWords = text.split(/\s/g).length;
   const minutes = noOfWords / wordsPerMinute;

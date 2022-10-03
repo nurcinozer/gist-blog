@@ -1,7 +1,5 @@
-import { GetServerSideProps } from "next";
-import { useMemo, useState } from "react";
-import { List, Spinner } from "../components";
-import { getGists, getMarkdownGists, Gist } from "../utils/services";
+import { List } from "../components";
+import { getMarkdownGists, Gist } from "../utils/services";
 
 type HomeProps = {
   articles: Gist[];

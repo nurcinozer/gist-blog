@@ -1,33 +1,24 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Comment as CommentCard, InnerCard } from "../../components";
-import { fetchRawUrl } from "../../utils/functions";
 import {
   Gist,
   Comment,
   getMarkdownGists,
   getCommentsByGist,
   MetaData,
+  getGistPaths,
 } from "../../utils/services";
-import matter from "gray-matter";
 
-type BlogInnerProps = {
+type Props = {
   article: Gist;
   comments: Comment[];
   articleMetadata: MetaData;
 };
 
-export const BlogInner = ({
-  article,
-  comments,
-  articleMetadata,
-}: BlogInnerProps) => {
+export const BlogInner = ({ article, comments }: Props) => {
   return (
     <>
-      <InnerCard
-        key={article.id}
-        article={article}
-        articleMetadata={articleMetadata}
-      />
+      <InnerCard key={article.id} article={article} />
       {comments.length > 0 && (
         <h1 className="text-2xl font-bold dark:text-white text-gray-600 text-center">
           Comments
@@ -51,27 +42,24 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const markdownGists = await getMarkdownGists();
   const article = markdownGists.find((gist) => gist.markdownFileName === slug);
   if (article) {
-    const rawContent = await fetchRawUrl(article?.rawUrl);
     const comments = await getCommentsByGist(article);
-    const { data: articleMetadata, content } = matter(rawContent);
-
     return {
       props: {
-        article: { ...article, rawContent: content },
+        article,
         comments,
-        articleMetadata,
       },
     };
+  } else {
+    return {
+      notFound: true,
+    };
   }
-  return {
-    notFound: true,
-  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const markdownGists = await getMarkdownGists();
-  const paths = markdownGists.map((gist) => ({
-    params: { slug: gist.markdownFileName },
+  const markdownGists = await getGistPaths();
+  const paths = markdownGists.map((fileName) => ({
+    params: { slug: fileName },
   }));
   return {
     paths,
